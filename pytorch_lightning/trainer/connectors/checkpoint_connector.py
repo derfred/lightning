@@ -198,6 +198,8 @@ class CheckpointConnector:
         # restore loops and their progress
         self.restore_loops()
 
+        # QUICK HACK to enable resuming
+        return 
         assert self.trainer.state.fn is not None
         if self.trainer.state.fn == TrainerFn.FITTING:
             # restore optimizers and schedulers state
@@ -270,6 +272,8 @@ class CheckpointConnector:
         fit_loop.epoch_progress.current.completed = self._loaded_checkpoint["epoch"]
 
         assert self.trainer.state.fn is not None
+        # QUICK HACK to enable resuming
+        return
         state_dict = self._loaded_checkpoint.get("loops")
         if state_dict is not None:
             if self.trainer.state.fn in (TrainerFn.FITTING, TrainerFn.TUNING):
